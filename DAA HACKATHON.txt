@@ -1,0 +1,47 @@
+import java.util.Scanner;
+import java.util.Random;
+public class VoiceControlledGame {
+    static int skillLevel = 0;
+    static int tasksCompleted = 0;
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to Vocational Skill Trainer: Virtual Carpentry!");
+        System.out.println("Simulated voice commands: say 'cut', 'measure', 'drill', or 'exit'.");
+        while (true) {
+            System.out.print("\nAwaiting your voice command: ");
+            String voiceCommand = scanner.nextLine().toLowerCase();
+            switch (voiceCommand) {
+                case "cut":
+                    performTask("cutting wood");
+                    break;
+                case "measure":
+                    performTask("measuring plank");
+                    break;
+                case "drill":
+                    performTask("drilling hole");
+                    break;
+                case "exit":
+                    System.out.println("Thanks for training! Total tasks completed: " + tasksCompleted);
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Unrecognized command. Try again.");
+            }
+        }
+    }
+    public static void performTask(String task) {
+        System.out.println("Performing task: " + task + "...");
+        Random rand = new Random();
+        boolean success = rand.nextBoolean(); // 50% chance of success for demo
+        if (success) {
+            skillLevel += 10;
+            tasksCompleted++;
+            System.out.println("Success! Skill level increased to " + skillLevel);
+        } else {
+            System.out.println("Task failed. Try again to improve.");
+        }
+        if (skillLevel >= 50) {
+            System.out.println("Congratulations! You've reached apprentice level carpentry skills!");
+        }
+    }
+}
